@@ -1,0 +1,140 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#06080B">
+  <meta name="description" content="Audio y tecnología HERLEZZ. Encuentra tu producto y pídelo por WhatsApp.">
+  <title>HERLEZZ | Catálogo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root { color-scheme: dark; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #06080B; color: #FFFFFF; font-family: system-ui, Arial, sans-serif; }
+    .page-glow { background: radial-gradient(circle at 85% 3%, rgba(0,210,255,.13), transparent 28rem); }
+    .brand { display: flex; align-items: center; min-width: 0; }
+    .brand-logo { display: block; height: 42px; width: auto; max-width: 100%; object-fit: contain; }
+    .card { background: #0C1820; box-shadow: 0 16px 38px rgba(0,0,0,.24); transition: border-color .2s ease, box-shadow .2s ease; }
+    .card:hover { border-color: #00D2FF; box-shadow: 0 0 28px rgba(0,210,255,.14); }
+    .product-image { display: block; width: 100%; aspect-ratio: 941 / 1664; object-fit: cover; background: #06080B; }
+    .button-glow { box-shadow: 0 0 24px rgba(0,210,255,.25); }
+    .button-glow:hover { box-shadow: 0 0 38px rgba(0,210,255,.44); }
+    .wholesale { background: #0C1820; box-shadow: 0 0 38px rgba(0,210,255,.16); }
+    a:focus-visible { outline: 2px solid #00D2FF; outline-offset: 4px; }
+  </style>
+</head>
+<body class="page-glow antialiased">
+  <header class="border-b border-[#1B2A36] bg-[#06080B]">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between gap-3 px-5 py-5 sm:px-8 lg:px-10" aria-label="Navegación principal">
+<a href="#inicio" class="flex items-center" aria-label="HERLEZZ, inicio">
+<img src="{% static 'products/herlezz.png' %}" alt="HERLEZZ" style="height: 48px; width: 190px; object-fit: contain; display: block;">
+</a>
+      <div class="hidden gap-8 text-sm font-bold text-[#9BA9B5] md:flex">
+        <a href="#productos" class="hover:text-white">Productos</a>
+        <a href="#mayoristas" class="hover:text-white">Mayoristas</a>
+        <a href="#beneficios" class="hover:text-white">Beneficios</a>
+      </div>
+      <a href="#productos" class="rounded-full border border-[#00D2FF]/60 px-3 py-2 text-xs font-extrabold uppercase tracking-wider text-[#00D2FF] sm:px-5">Ver tienda ↗</a>
+    </nav>
+  </header>
+
+  <main id="inicio">
+    <section class="mx-auto max-w-7xl px-5 pb-20 pt-20 sm:px-8 lg:px-10 lg:pt-24">
+      <p class="mb-5 inline-flex items-center gap-3 rounded-full border border-[#2ED1C8]/40 bg-[#2ED1C8]/10 px-4 py-2 text-xs font-extrabold uppercase tracking-[.18em] text-[#2ED1C8]">
+        <span class="h-2 w-2 rounded-full bg-[#2ED1C8]" aria-hidden="true"></span> Audio y tecnología HERLEZZ
+      </p>
+      <h1 class="max-w-3xl text-5xl font-black leading-tight tracking-tight sm:text-6xl">Tu próxima forma de <span class="text-[#00D2FF]">escuchar.</span></h1>
+      <p class="mt-6 max-w-2xl text-base leading-8 text-[#9BA9B5]">Descubre nuestros productos, revisa sus beneficios y pide tu favorito directamente por WhatsApp.</p>
+      <a href="#productos" class="button-glow mt-8 inline-flex rounded-xl bg-[#00D2FF] px-7 py-3 font-extrabold text-[#06080B]">Explorar productos ↗</a>
+    </section>
+
+    <section id="productos" class="mx-auto max-w-7xl scroll-mt-20 px-5 pb-20 sm:px-8 lg:px-10" aria-labelledby="products-title">
+      <div class="mb-9 flex flex-wrap items-end justify-between gap-5 border-t border-[#1B2A36] pt-14">
+        <div>
+          <p class="mb-2 text-xs font-extrabold uppercase tracking-[.2em] text-[#2ED1C8]">01 / Colección</p>
+          <h2 id="products-title" class="text-4xl font-black tracking-tight">Nuestros productos<span class="text-[#00D2FF]">.</span></h2>
+        </div>
+        <span class="rounded-full border border-[#1B2A36] bg-[#0C1820] px-4 py-2 text-xs font-bold text-[#9BA9B5]">{{ products|length }} disponibles</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for product in products %}
+          <article class="card flex min-w-0 flex-col overflow-hidden rounded-3xl border border-[#1B2A36]">
+            {% if product.image %}
+              <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image" loading="lazy" width="941" height="1664">
+            {% else %}
+              <div class="relative flex aspect-[941/1664] flex-col items-center justify-center bg-[#06080B] p-8 text-center" style="background-image: radial-gradient(circle, rgba(0,210,255,.17), transparent 60%);">
+                <svg viewBox="0 0 64 64" class="h-28 w-28 text-[#00D2FF]" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M10 34v-6a22 22 0 0 1 44 0v6"/><rect x="7" y="31" width="10" height="19" rx="5"/><rect x="47" y="31" width="10" height="19" rx="5"/></svg>
+                <span class="mt-6 text-xl font-black text-white">{{ product.name }}</span>
+                <span class="mt-2 text-xs font-bold uppercase tracking-widest text-[#2ED1C8]">HERLEZZ</span>
+              </div>
+            {% endif %}
+
+            <div class="flex flex-1 flex-col p-6">
+              {% if product.badge_text %}
+                <span class="mb-4 w-fit rounded-full border border-[#2ED1C8]/40 bg-[#2ED1C8]/10 px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider text-[#2ED1C8]">{{ product.badge_text }}</span>
+              {% endif %}
+              <div class="flex items-start justify-between gap-3">
+                <h3 class="text-xl font-black text-white">{{ product.name }}</h3>
+                <span class="shrink-0 text-xl font-black text-white">${{ product.price|floatformat:"2u" }}</span>
+              </div>
+              {% if product.description %}<p class="mt-3 text-sm leading-6 text-[#9BA9B5]">{{ product.description }}</p>{% endif %}
+
+              <ul class="mt-5 space-y-3 border-t border-[#1B2A36] pt-5" aria-label="Beneficios de {{ product.name }}">
+                {% for benefit in product.benefits.all %}
+                  <li class="flex items-start gap-3 text-sm leading-5 text-[#9BA9B5]">
+                    <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-[#00D2FF]/10 text-[#00D2FF]" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        {% if benefit.icon == 'audio' %}<path d="M3 10v4M7 6v12M11 9v6M15 4v16M19 8v8"/>
+                        {% elif benefit.icon == 'connection' %}<path d="m13 2-9 12h7l-1 8 10-13h-7l1-7Z"/>
+                        {% elif benefit.icon == 'noise' %}<rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v5m-4 0h8"/>
+                        {% elif benefit.icon == 'warranty' %}<path d="M12 2 4 5v6c0 5 3.4 8.6 8 11 4.6-2.4 8-6 8-11V5l-8-3Z"/><path d="m9 12 2 2 4-4"/>
+                        {% elif benefit.icon == 'magsafe' %}<path d="M5 3v10a7 7 0 0 0 14 0V3h-5v10a2 2 0 0 1-4 0V3H5Z"/>
+                        {% elif benefit.icon == 'design' %}<path d="m12 2 1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2Z"/>
+                        {% endif %}
+                      </svg>
+                    </span>
+                    <span>{{ benefit.text }}</span>
+                  </li>
+                {% endfor %}
+                {% if product.includes_case %}
+                  <li class="flex items-start gap-3 text-sm font-semibold leading-5 text-[#9BA9B5]"><span class="text-[#2ED1C8]" aria-hidden="true">✓</span><span>Incluye estuche protector</span></li>
+                {% endif %}
+              </ul>
+
+              <a href="{{ product.whatsapp_url }}" target="_blank" rel="noopener noreferrer" class="button-glow mt-auto flex min-h-12 items-center justify-center rounded-xl bg-[#00D2FF] px-4 py-3 text-center text-sm font-black text-[#06080B]" aria-label="Pedir {{ product.name }} por WhatsApp">Pedir por WhatsApp ↗</a>
+            </div>
+          </article>
+        {% empty %}
+          <div class="rounded-3xl border border-[#1B2A36] bg-[#0C1820] p-10 text-center md:col-span-2 lg:col-span-3">
+            <h3 class="text-xl font-black">Pronto tendremos novedades.</h3>
+            <p class="mt-3 text-sm text-[#9BA9B5]">Ejecuta <code>python manage.py seed_data</code> para cargar los productos de prueba.</p>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section id="mayoristas" class="mx-auto max-w-7xl scroll-mt-20 px-5 pb-20 sm:px-8 lg:px-10" aria-labelledby="wholesale-title">
+      <div class="wholesale rounded-3xl border border-[#00D2FF] p-8 sm:p-12">
+        <p class="text-xs font-extrabold uppercase tracking-[.2em] text-[#2ED1C8]">02 / Canal mayorista</p>
+        <h2 id="wholesale-title" class="mt-4 text-3xl font-black sm:text-4xl">¿ERES MAYORISTA O QUIERES EMPRENDER?</h2>
+        <p class="mt-5 max-w-3xl text-sm leading-7 text-[#9BA9B5] sm:text-base">Accede a nuestros precios especiales por volumen, asesoría personalizada y combos con margen de alta rentabilidad para tu negocio o reventa.</p>
+        <a href="https://wa.me/593983670320?text=%C2%A1Hola%20HERLEZZ%21%20%F0%9F%91%8B%20Estoy%20interesado%20en%20comprar%20al%20por%20mayor%20y%20quiero%20conocer%20la%20lista%20de%20precios%20mayorista%2C%20stock%20disponible%20y%20condiciones%20de%20env%C3%ADo." target="_blank" rel="noopener noreferrer" class="button-glow mt-7 inline-flex min-h-12 items-center rounded-xl bg-[#00D2FF] px-6 py-3 text-sm font-black text-[#06080B]">Contactar a Ventas Mayoristas ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer id="beneficios" class="border-t border-[#1B2A36] bg-[#0C1820]/60">
+    <div class="mx-auto grid max-w-7xl gap-7 px-5 py-10 text-sm sm:grid-cols-3 sm:px-8 lg:px-10">
+      <div><strong class="text-white">Envío gratis a Loja</strong><p class="mt-2 text-[#9BA9B5]">Entrega sin costo en la ciudad.</p></div>
+      <div><strong class="text-white">Envíos a todo el Ecuador</strong><p class="mt-2 text-[#9BA9B5]">Cobertura nacional.</p></div>
+      <div><strong class="text-white">Garantía en todos los productos</strong><p class="mt-2 text-[#9BA9B5]">Atención directa HERLEZZ.</p></div>
+    </div>
+    <div class="mx-auto flex max-w-7xl flex-wrap justify-between gap-5 border-t border-[#1B2A36] px-5 py-7 text-xs text-[#9BA9B5] sm:px-8 lg:px-10">
+      <span>© 2026 HERLEZZ. Todos los derechos reservados.</span>
+      <div class="flex flex-wrap gap-5"><a href="https://www.tiktok.com/@herlezz" target="_blank" rel="noopener noreferrer">TikTok @herlezz</a><a href="https://www.instagram.com/herlezzec/" target="_blank" rel="noopener noreferrer">Instagram @herlezzec</a></div>
+    </div>
+  </footer>
+</body>
+</html>
